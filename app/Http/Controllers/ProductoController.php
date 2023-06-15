@@ -55,7 +55,7 @@ class ProductoController extends Controller
         $producto->user_id = $request->input('user_id');
 
         $producto->save();
-        return redirect()->intended('/productos');
+        return redirect()->intended('/productosadmin');
     }
 
     /**
@@ -164,7 +164,10 @@ class ProductoController extends Controller
         }
     }
 
-    //metodos del carrito
+    // //metodos del carrito
+    // public function pagarpay(){
+    //     return view('usuario.pagopaypal');
+    // }
     public function productCart()
     {
         return view('usuario.cart');

@@ -94,29 +94,3 @@
     </div>
   </div>
 @endsection
-
-@section('js')
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script type="text/javascript">
- $(".interesado").click(function(event) {
-    event.preventDefault(); // Evita el comportamiento predeterminado del enlace
-    
-    var href = $(this).attr("href"); // Obtén la URL del enlace
-    
-    // Realizar acción del enlace
-    window.location.href = href;
-    
-    // Mostrar SweetAlert después de que la página se haya cargado completamente
-    window.onload = function() {
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Your work has been saved',
-        showConfirmButton: false,
-        timer: 1500
-      });
-    };
-  });
-
-</script>
-@endsection

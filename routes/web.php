@@ -123,12 +123,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/producto/buscar/categoria', [ProductoController::class, 'buscarCategoria']);
 
     //carrrito
-    Route::get('/shopping-cart', [ProductoController::class, 'productCart'])->name('shopping.cart');
+    Route::get('/carrito', [ProductoController::class, 'productCart']);
     Route::get('/product/{id}', [ProductoController::class, 'addProducttoCart'])->name('addProduct.to.cart');
     Route::patch('/update-shopping-cart', [ProductoController::class, 'updateCart'])->name('update.sopping.cart');
     Route::delete('/delete-cart-product', [ProductoController::class, 'deleteProduct'])->name('delete.cart.product');
     Route::delete('/update-cart-product', [ProductoController::class, 'updateProduct'])->name('update.cart.product');
     Route::put('/sumar-cart-product', [ProductoController::class, 'sumaProduct'])->name('sumar.cart.product');
+
+    //Route::get('/pagar', [ProductoController::class, 'pagarpay']);
 
     //-------------CONTACTO---------------------------
     //envia un email al usuario interesado
