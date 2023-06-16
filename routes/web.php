@@ -132,6 +132,9 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/borrar-carrito', [ProductoController::class, 'borrarcarrito']);
 
+    //generar un pdf
+    Route::get('/generar-pdf', [ProductoController::class, 'generarpdf']);
+
     //-------------CONTACTO---------------------------
     //envia un email al usuario interesado
     Route::post('/enviar/info/contacto', [ResenaController::class, 'store']);

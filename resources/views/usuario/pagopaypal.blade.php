@@ -71,7 +71,7 @@
                     </tr>
                     <tr>
                         <td colspan="5" class="text-right">
-                            <a href="/productos" class="btn btn-outline-primary""><i class="fa fa-angle-left"></i> Continue Comprando</a>
+                            <a href="/productos" class="btn btn-outline-primary"><i class="fa fa-angle-left"></i> Continue Comprando</a>
                         </td>
                     </tr>
                 </tfoot>
@@ -111,6 +111,7 @@
         onApprove:  function (data, actions){
             actions.order.capture().then(function(detalles){
                 console.log(detalles);
+                generarPDF();
                 // Llamar a la función para borrar el carrito de la sesión en Laravel
             borrarCarritoEnLaravel();
             window.location.reload();
@@ -122,6 +123,33 @@
             console.log(data);
         }
     }).render('#paypal-button-container');
+
+    function generarPDF() {
+    // Configurar la URL de la solicitud GET
+    var url = '/generar-pdf'; // Ruta en tu backend de Laravel para generar el PDF
+    
+    // Configurar la solicitud GET
+    var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+    };
+
+    // Enviar la solicitud GET
+    fetch(url, requestOptions)
+        .then(response => response.blob())
+        .then(blob => {
+            // Crear un enlace para descargar el archivo
+            var downloadLink = document.createElement('a');
+            downloadLink.href = URL.createObjectURL(blob);
+            downloadLink.download = 'facturaPedido.pdf';
+
+            // Simular un clic en el enlace para iniciar la descarga
+            downloadLink.click();
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
 
     function borrarCarritoEnLaravel() {
     // Configurar la URL de la solicitud POST

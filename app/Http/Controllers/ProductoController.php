@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Dompdf\Adapter\PDFLib;
 
 class ProductoController extends Controller
 {
@@ -165,8 +167,16 @@ class ProductoController extends Controller
         }
     }
 
+    //genera un pdf
+    public function generarpdf(){
+        $carrito = session('cart');
+        $pdf = Pdf::loadView('usuario.pdf',compact('carrito') );
+        return $pdf->download('facturaPedido.pdf');
+    }
+
     //metodos del carrito borrar todo
     public function borrarcarrito(){
+
          // Borra el carrito de la sesión en Laravel
          Session::forget('cart');
          return response()->json(['success' => true]);
