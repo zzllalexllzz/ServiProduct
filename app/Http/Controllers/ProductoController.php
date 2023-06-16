@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
+use Illuminate\Support\Facades\Session;
 
 class ProductoController extends Controller
 {
@@ -164,13 +165,15 @@ class ProductoController extends Controller
         }
     }
 
-    // //metodos del carrito
-    // public function pagarpay(){
-    //     return view('usuario.pagopaypal');
-    // }
+    //metodos del carrito borrar todo
+    public function borrarcarrito(){
+         // Borra el carrito de la sesión en Laravel
+         Session::forget('cart');
+         return response()->json(['success' => true]);
+    }
     public function productCart()
     {
-        return view('usuario.cart');
+        return view('usuario.pagopaypal');
     }
     public function addProducttoCart($id)
     {

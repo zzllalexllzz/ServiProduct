@@ -130,7 +130,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/update-cart-product', [ProductoController::class, 'updateProduct'])->name('update.cart.product');
     Route::put('/sumar-cart-product', [ProductoController::class, 'sumaProduct'])->name('sumar.cart.product');
 
-    //Route::get('/pagar', [ProductoController::class, 'pagarpay']);
+    Route::post('/borrar-carrito', [ProductoController::class, 'borrarcarrito']);
 
     //-------------CONTACTO---------------------------
     //envia un email al usuario interesado
