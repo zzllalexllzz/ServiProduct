@@ -48,10 +48,34 @@
             font-weight: bold;
             font-size: 24px;
         }
+
+        .user-details {
+            margin-bottom: 20px;
+        }
+
+        .user-details p {
+            margin: 5px 0;
+        }
+
+        .user-details strong {
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
     <h3>Factura del Pedido</h3>
+
+    <div class="user-details">
+        <h4>Datos del Usuario:</h4>
+        <p><strong>Nombre:</strong> {{ Auth::user()->nombre }}</p>
+        <p><strong>Email:</strong> {{ Auth::user()->email }}</p>
+        <p><strong>DNI:</strong> {{ Auth::user()->dni }}</p>
+        <p><strong>Ciudad:</strong> {{ Auth::user()->ciudad }}</p>
+        <p><strong>Dirección:</strong> {{ Auth::user()->direccion }}</p>
+        <p><strong>Teléfono:</strong> {{ Auth::user()->telefono }}</p>
+        <!-- Agrega aquí más detalles del usuario si es necesario -->
+    </div>
+
     <table class="invoice-table">
         <thead>
             <tr>
@@ -86,7 +110,7 @@
         <tfoot>
             <tr>
                 <td colspan="5">
-                    <span>Total a Pagar:</span>
+                    <span>Total: </span>
                     <h2>{{ $total }} €</h2>
                 </td>
             </tr>

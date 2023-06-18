@@ -122,13 +122,15 @@
 
   <div class="container mt-5">
     <div class="row">
+
         @foreach($servicios as $servicio)
+
         <div class="col-md-4">
             <div class="card">
-            <img src="{{asset($servicio->imagen)}}" class="card-img-top" alt="Imagen 2">
+            <img src="{{asset($servicio->imagen)}}" class="card-img-top img-fluid" alt="Imagen 2">
                 <div class="card-body text-center">
                     <h5 class="card-title text-uppercase" style="color: #53adee;">{{$servicio->nombre}}</h5>
-                    <p class="card-text">{{$servicio->ciudad}}</p>
+                    <p class="card-text text-uppercase">{{$servicio->ciudad}}</p>
                 </div>
             </div>
         </div>

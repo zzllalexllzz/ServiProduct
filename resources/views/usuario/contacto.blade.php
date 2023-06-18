@@ -4,12 +4,16 @@
 
 @section('main')
 <div class="container">
+    
     <div class="container text-center mt-5 mb-5">
-        <h5>Tu opinión es valiosa y nos ayuda a crecer. Nos encantaría escuchar tus pensamientos y brindarte la mejor experiencia posible. No tengas miedo de compartir, cada palabra cuenta en nuestro camino hacia la mejora constante.</h5>
-    </div>
+      <h5>¡Contáctanos a través de nuestra página de contacto y solicita tu perfil de creador! Con nuestro formulario, podrás subir tus servicios y compartir tu talento con el mundo.</h5>
+  </div>
+  <div class="container text-center mt-5 mb-5">
+    <p>Tu opinión es valiosa y nos ayuda a crecer. Nos encantaría escuchar tus pensamientos y brindarte la mejor experiencia posible. No tengas miedo de compartir, cada palabra cuenta en nuestro camino hacia la mejora constante.</p>
+</div>
     <h1 class="text-center mt-5">Formulario de Contacto</h1>
     <div class="row justify-content-center">
-      <div class="col-lg-6">
+      <div class="col-lg-6 mb-5">
         <form action="/enviar/info/contacto" method="post">
           @csrf
           <div class="mb-3">
