@@ -27,7 +27,7 @@
                         <h5 class="card-text text-dark d-flex justify-content-end"><strong>Precio:&nbsp</strong>{{$producto->precio}} €</h5>
                         <p class="card-subtitle mb-2 text-light-emphasis ">{{$producto->fecha}}</p>
                         <a class="btn btn-outline-dark shadow-lg" href="/producto/{{$producto->id}}/detalle">Ver más</a>
-                        <a href="{{ route('addProduct.to.cart', $producto->id) }}" class="btn btn-outline-success shadow-lg">Añadir carrito</a>
+                        {{-- <a href="{{ route('addProduct.to.cart', $producto->id) }}" class="btn btn-outline-success shadow-lg">Añadir carrito</a> --}}
                 </div>
             </div>
           </div>
