@@ -93,6 +93,7 @@
 <script src="https://www.paypal.com/sdk/js?client-id={{config('services.paypal.client_id')}}&currency=EUR">
 </script>
 <script>
+    //Botones del paypal developer checkout
     paypal.Buttons({
         style:{
             color: 'blue',
@@ -111,9 +112,10 @@
         onApprove:  function (data, actions){
             actions.order.capture().then(function(detalles){
                 console.log(detalles);
+                //llamo al funcion para generar la factura en formato pdf
                 generarPDF();
                 // Llamar a la función para borrar el carrito de la sesión en Laravel
-            borrarCarritoEnLaravel();
+            borrarCarrito();
             window.location.reload();
             });
         },
@@ -124,11 +126,11 @@
         }
     }).render('#paypal-button-container');
 
+    //metodo que llama un peticion a las rutas para generar el pdf de la factura
     function generarPDF() {
-    // Configurar la URL de la solicitud GET
-    var url = '/generar-pdf'; // Ruta en tu backend de Laravel para generar el PDF
-    
-    // Configurar la solicitud GET
+
+    var url = '/generar-pdf'; // nombre del la ruta en rutes
+
     var requestOptions = {
         method: 'GET',
         redirect: 'follow'
@@ -150,10 +152,10 @@
             console.error(error);
         });
 }
+    //metodo que borra todo el carrito con la lamada a la ruta borrar carrito esto borrara el carrito de la session cuando termine la compra
+    function borrarCarrito() {
 
-    function borrarCarritoEnLaravel() {
-    // Configurar la URL de la solicitud POST
-    var url = '/borrar-carrito'; // Ruta en tu backend de Laravel para borrar el carrito de la sesión
+    var url = '/borrar-carrito'; // nombre  de la ruta en routes
     
     // Configurar los datos del formulario
     var formData = new FormData();
@@ -177,13 +179,13 @@
         });
 }
 
-
+//metodo que borra el producto del carrito con la llamada a la ruta delete cart product
 $(".delete-product").click(function (e) {
     e.preventDefault();
 
-    var ele = this; // No es necesario usar jQuery para obtener el elemento
+    var ele = this;
 
-    var productId = ele.closest("tr").getAttribute("rowId"); // Utiliza el método closest() y getAttribute() para obtener el valor del atributo 'rowId'
+    var productId = ele.closest("tr").getAttribute("rowId"); // método closest() y getAttribute() para obtener el valor del atributo 'rowId'
 
     var url = '{{ route('delete.cart.product') }}';
     var token = '{{ csrf_token() }}';
@@ -208,12 +210,13 @@ $(".delete-product").click(function (e) {
     });
 });
 
+//metodo que decrementa la catidad del producto en el carrito con la llamada a update cart product
 $(".restar-product").click(function(e) {
     e.preventDefault();
 
-    var ele = this; // No es necesario utilizar jQuery para obtener el elemento
+    var ele = this; 
 
-    var productId = ele.closest("tr").getAttribute("rowId"); // Utiliza el método closest() y getAttribute() para obtener el valor del atributo 'rowId'
+    var productId = ele.closest("tr").getAttribute("rowId"); //método closest() y getAttribute() para obtener el valor del atributo 'rowId'
 
     var cartUrl = '{{ route('update.cart.product') }}';
     var token = '{{ csrf_token() }}';
@@ -228,13 +231,13 @@ $(".restar-product").click(function(e) {
     })
     .then(function (response) {
         if (response.ok) {
-            var quantityElement = ele.closest("tr").querySelector(".quantity"); // Utiliza el método closest() y querySelector() para obtener el elemento con la clase 'quantity'
+            var quantityElement = ele.closest("tr").querySelector(".quantity"); // método closest() y querySelector() para obtener el elemento con la clase 'quantity'
             var quantity = parseInt(quantityElement.textContent);
             quantity--;
             quantityElement.textContent = quantity;
 
             if (quantity === 0) {
-                ele.closest("tr").remove(); // Utiliza el método closest() para encontrar el elemento 'tr' más cercano y lo elimina
+                ele.closest("tr").remove(); //método closest() para encontrar el elemento 'tr' más cercano y lo elimina
             }
 
         } else {
@@ -247,12 +250,13 @@ $(".restar-product").click(function(e) {
     window.location.reload();
 });
 
+//metodo que incrementa la cantidad del prodcuto en el carrito con la llamda a sumar cart product
 $(".sumar-product").click(function(e) {
     e.preventDefault();
 
-    var ele = this; // No es necesario utilizar jQuery para obtener el elemento
+    var ele = this; 
 
-    var productId = ele.closest("tr").getAttribute("rowId"); // Utiliza el método closest() y getAttribute() para obtener el valor del atributo 'rowId'
+    var productId = ele.closest("tr").getAttribute("rowId"); //método closest() y getAttribute() para obtener el valor del atributo 'rowId'
 
     var cartUrl = '{{ route('sumar.cart.product') }}';
     var token = '{{ csrf_token() }}';
@@ -267,7 +271,7 @@ $(".sumar-product").click(function(e) {
     })
     .then(function(response) {
         if (response.ok) {
-            var quantityElement = ele.closest("tr").querySelector(".quantity"); // Utiliza el método closest() y querySelector() para obtener el elemento con la clase 'quantity'
+            var quantityElement = ele.closest("tr").querySelector(".quantity"); //método closest() y querySelector() para obtener el elemento con la clase 'quantity'
             var quantity = parseInt(quantityElement.textContent);
             quantity++;
             quantityElement.textContent = quantity;

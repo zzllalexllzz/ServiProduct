@@ -37,7 +37,7 @@ class ProductoController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * metodo que añade un producto
      */
     public function store(Request $request)
     {
@@ -62,7 +62,7 @@ class ProductoController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * metodo que muestra el detalle de un producto determinado
      */
     public function show(Producto $producto)
     {
@@ -84,7 +84,7 @@ class ProductoController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * metodo que modifica  un producto determinado
      */
     public function update(Request $request, Producto $producto)
     {
@@ -101,7 +101,7 @@ class ProductoController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * metodo que elimina un producto 
      */
     public function destroy(Producto $producto)
     {
@@ -167,24 +167,28 @@ class ProductoController extends Controller
         }
     }
 
-    //genera un pdf
+    //metodo que genera un pdf
     public function generarpdf(){
         $carrito = session('cart');
         $pdf = Pdf::loadView('usuario.pdf',compact('carrito') );
         return $pdf->download('facturaPedido.pdf');
     }
 
-    //metodos del carrito borrar todo
+    //metodos del carrito borrar todo al finalizar la compra
     public function borrarcarrito(){
 
          // Borra el carrito de la sesión en Laravel
          Session::forget('cart');
          return response()->json(['success' => true]);
     }
+
+    //metodo  que muesta la vista del carrito
     public function productCart()
     {
         return view('usuario.pagopaypal');
     }
+
+    //metodo que añade un producto al carrito
     public function addProducttoCart($id)
     {
         $product = Producto::findOrFail($id);
@@ -204,6 +208,7 @@ class ProductoController extends Controller
         return redirect()->back()->with('success', 'El producto ha sido agregado al carrito!');
     }
 
+    //metodo que actualiza el carrito
     public function updateCart(Request $request)
     {
         if($request->id && $request->quantity){
@@ -213,7 +218,8 @@ class ProductoController extends Controller
             session()->flash('success', 'Product added to cart.');
         }
     }
-  
+
+    //metodo que eleimina el producto del carrito
     public function deleteProduct(Request $request)
     {
         if($request->id) {
@@ -226,6 +232,7 @@ class ProductoController extends Controller
         }
     }
 
+    //metodo que  decrementa la cantidad del producto en el carrito
     public function updateProduct(Request $request)
     {
         if ($request->id) {
@@ -247,8 +254,9 @@ class ProductoController extends Controller
         }
     }
 
+    //metodo que añade incrementa la cantida de cada producto en el carrito
     public function sumaProduct(Request $request)
-{
+    {
     if ($request->id) {
         $cart = session()->get('cart');
         

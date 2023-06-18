@@ -26,7 +26,8 @@ class ResenaController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * metodo que envia un email del formulario de contacto para cualquier
+     *  opinion de usuario como soliciatar un cuenta de creado o algun problema con  el sitio
      */
     public function store(Request $request)
     {

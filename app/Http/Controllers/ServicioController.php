@@ -198,6 +198,8 @@ class ServicioController extends Controller
         }
     }
 
+    //metodo que envia un email al usuarrio interesado con el servicio mas los datos del creador del servicio
+    //con el que prodra contactar .
     public function envioEmail(Servicio $servicio, User $user){
 
         $dueño = User::select('users.*')

@@ -142,11 +142,11 @@ Route::middleware('auth')->group(function () {
 
 //rutas solo para web sin  autenticar
 Route::get('/', function () {
-    return view('welcome',['servicios' => Servicio::paginate(3)]);
+    return view('welcome',['servicios' => Servicio::paginate(3)]);//HOME
 });
-Route::get('/servicios', [ServicioController::class, 'index1']);
-Route::get('/productos', [ProductoController::class, 'index1']);
-Route::get('/contacto', [ResenaController::class, 'index']);
+Route::get('/servicios', [ServicioController::class, 'index1']);//SERVICIOS
+Route::get('/productos', [ProductoController::class, 'index1']);//PRODUCTOS
+Route::get('/contacto', [ResenaController::class, 'index']);//CONTACTO
 
 
 require __DIR__.'/auth.php';
