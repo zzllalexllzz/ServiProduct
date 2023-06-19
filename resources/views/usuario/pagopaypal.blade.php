@@ -115,7 +115,7 @@
                 //llamo al funcion para generar la factura en formato pdf
                 generarPDF();
                 // Llamar a la función para borrar el carrito de la sesión en Laravel
-            borrarCarrito();
+                borrarCarrito();
             window.location.reload();
             });
         },

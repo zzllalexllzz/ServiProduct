@@ -171,6 +171,7 @@ class ProductoController extends Controller
     public function generarpdf(){
         $carrito = session('cart');
         $pdf = Pdf::loadView('usuario.pdf',compact('carrito') );
+        $pdf->render();
         return $pdf->download('facturaPedido.pdf');
     }
 
